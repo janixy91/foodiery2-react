@@ -1,3 +1,8 @@
+@import "./routes/home/home.scss";
+@import "./routes/restaurant-detail/restaurant-detail.scss";
+@import "./components/carrusel/carrusel.scss";
+@import "./components/compositions/plateItem/plate-item.scss";
+
 .App {
   text-align: center;
 }
@@ -35,4 +40,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.super-button {
+  background-color: steelblue !important;
+  height: 60px;
+  margin-bottom: 30px;
+  font-family: 'Chewy';
+  box-shadow: 10px 10px 9px -7px rgba(168, 168, 168, 1);
+  letter-spacing: 1px;
+  font-size: 20px;
 }

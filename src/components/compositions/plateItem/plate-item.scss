@@ -1,0 +1,41 @@
+.plate-item {
+  position: relative;
+  border: 1px solid rgb(238 242 255);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.plate-item__top {
+}
+
+.plate-item__right {
+  display: flex;
+  flex-direction: column;
+}
+
+.plate-item__name {
+  font-family: "Gagalin";
+}
+
+.plate-item__time {
+  font-size: 12px;
+}
+
+.plate-item__image {
+  width: 100%;
+}
+
+.plate-item__rating {
+  position: absolute;
+  top: -12px;
+  right: -6px;
+  height: 28px;
+  width: 28px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: white;
+  font-family: chewy;
+}
