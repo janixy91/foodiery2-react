@@ -4,7 +4,10 @@ import MyContext from "./Context";
 const MyProvider = ({ children }) => {
   const [value, setValue] = useState("valor inicial");
   const [ctxRestaurants, setCtxRestaurants] = useState([]);
-  const [ctxWhislist, setCtxWhislist] = useState([]);
+  const [ctxWhislist, setCtxWhislist] = useState({
+    plates: [],
+    restaurants: [],
+  });
 
   return (
     <MyContext.Provider

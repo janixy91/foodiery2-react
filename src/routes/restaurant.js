@@ -58,12 +58,12 @@ const RestaurantList = () => {
 
   function onEditPlate(plate) {
     navigate("/create-plate", {
-      state: { restaurant, step: 5, from: "edit", plate },
+      state: { restaurant, step: 4, from: "edit", plate },
     });
   }
 
   function onBack() {
-    navigate(-1);
+    navigate("/visited");
   }
   return (
     <div
@@ -139,7 +139,7 @@ const RestaurantList = () => {
 
           <TouchableOpacity style={styles.addButton} onPress={onGoCreate}>
             <GoPlus size={24} color="white" />
-            <MdOutlineAddLocationAlt
+            <PiBowlFoodDuotone
               name="silverware-fork-knife"
               size={24}
               color="white"

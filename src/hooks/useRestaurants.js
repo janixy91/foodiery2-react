@@ -14,6 +14,24 @@ const useRestaurants = () => {
     loadRestaurants();
   }, []);
 
+  async function createRestaurant(restaurant, placeId) {
+    try {
+      const response = await axios.post(
+        `/restaurants`,
+        { restaurantString: JSON.stringify(restaurant), placeId },
+        {
+          headers: {
+            authorization: session?._id,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
   async function loadRestaurants() {
     if (ctxRestaurants.length === 0) {
       setLoad(false);
@@ -34,7 +52,12 @@ const useRestaurants = () => {
       setLoading(false);
     }
   }
-  return { load, loading, error, loadRestaurants };
+
+  function isVisited(placeId) {
+    return !!ctxRestaurants.find((item) => item.placeId === placeId);
+  }
+
+  return { load, loading, error, loadRestaurants, isVisited, createRestaurant };
 };
 
 export default useRestaurants;

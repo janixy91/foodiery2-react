@@ -18,6 +18,7 @@ import RestaurantList from "./routes/restaurant";
 import Profile from "./routes/profile";
 import NewPlate from "./routes/newPlate";
 import Visited from "./routes/visited";
+import Wishlist from "./routes/wishlist/Wishlist";
 import RestaurantDetail from "./routes/restaurant-detail/RestaurantDetail";
 import MyProvider from "./context/Provider";
 
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/restaurant" element={<RestaurantList />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/visited" element={<Visited />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/create-plate" element={<NewPlate />} />
           <Route path="/restaurant-detail" element={<RestaurantDetail />} />
           <Route

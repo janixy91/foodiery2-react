@@ -16,14 +16,13 @@ import {
 import { useAuth } from "../hooks/useAuth";
 import TouchableOpacity from "../components/atoms/TouchableOpacity";
 import Header from "../components/compositions/Header";
-import { FaUserLarge } from "react-icons/fa6";
 import LoadingSpinner from "../components/atoms/Loading";
-import { PiBowlFoodDuotone } from "react-icons/pi";
 import { GoPlus } from "react-icons/go";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 import MyContext from "../context/Context";
 import useRestaurants from "../hooks/useRestaurants";
+import RestaurantItem from "../components/compositions/restaurantItem/RestaurantItem";
 
 const Visited = () => {
   const Plate = require("../assets/plate.png");
@@ -136,49 +135,15 @@ const Visited = () => {
                 .map((item, index) => {
                   return (
                     <li key={index} style={{ listStyle: "none" }}>
-                      <TouchableOpacity
+                      <RestaurantItem
+                        {...item}
+                        onPress={() => handleRestaurantPress(item._id)}
                         style={
                           index === ctxRestaurants.length - 1
                             ? styles.lastRestaurant
                             : {}
                         }
-                        onPress={() => handleRestaurantPress(item._id)}
-                      >
-                        <View style={styles.restaurantItem}>
-                          <div>
-                            <Text
-                              style={styles.restaurantName}
-                              classname="supertitle"
-                            >
-                              {item.name}
-                            </Text>
-                            <span
-                              style={{
-                                display: "block",
-                                fontSize: "12px",
-                                color: "gray",
-                              }}
-                            >
-                              {item.locality}
-                            </span>
-                          </div>
-
-                          <View style={styles.ratingContainer}>
-                            <Text
-                              style={styles.ratingText}
-                              classname="supertitle"
-                            >
-                              {item.plates.length}
-                            </Text>
-                            <PiBowlFoodDuotone
-                              name="silverware-fork-knife"
-                              size={20}
-                              color={SECOND_COLOR2}
-                              style={{ position: "relative", top: "4px" }}
-                            />
-                          </View>
-                        </View>
-                      </TouchableOpacity>
+                      />
                     </li>
                   );
                 })}
@@ -193,9 +158,10 @@ const Visited = () => {
                   fontSize: 18,
                   textAlign: "center",
                   color: "black",
+                  display: "block",
                 }}
               >
-                Empieza añadiendo un plato que hayas probado
+                Empieza añadiendo una nueva visita
               </Text>
               <Image
                 source={Plate}
@@ -207,10 +173,20 @@ const Visited = () => {
                 }}
                 resizeMode="contain" // Esto hará que la imagen se ajuste proporcionalmente y cubra el contenedor
               />
+
               <Button
-                text="Añadir un plato"
                 onPress={onGoCreate}
-                style={{ marginTop: 10 }}
+                className={"super-button"}
+                text={
+                  <div class="home__button-add">
+                    <MdOutlineAddLocationAlt
+                      size={24}
+                      color="white"
+                      style={{ marginLeft: 8 }}
+                    />
+                    <span class="home__button-add-text">¡Nueva visita!</span>
+                  </div>
+                }
               />
             </View>
           )}
@@ -237,14 +213,6 @@ const Visited = () => {
               />
             </TouchableOpacity>
           )}
-          {/* Modal para agregar nuevo restaurante o plato */}
-          {/* <View style={styles.centeredView}>
-            <ModalNewPlate
-              isVisible={isModalVisible}
-              toggleModal={toggleModal}
-              onSavePlate={onSavePlate}
-            />
-          </View> */}
         </View>
         {/* <AdMobBanner
           style={styles.bottomBanner}
@@ -281,9 +249,6 @@ const styles = {
     border: "1px solid #d7d7d7",
     borderBottom: 0,
   },
-  restaurantName: {
-    paddingRight: 8,
-  },
   header: {
     fontSize: 24,
     fontWeight: "bold",
@@ -298,27 +263,6 @@ const styles = {
     marginBottom: 16,
     paddingHorizontal: 10,
     borderStyle: "solid",
-  },
-  restaurantItem: {
-    borderBottomWidth: 1,
-    borderBottomColor: "lightgray",
-    borderBottomStyle: "solid",
-    paddingVertical: 8,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: 60,
-  },
-
-  ratingContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  ratingText: {
-    marginRight: 4,
-    color: SECOND_COLOR2,
-    fontWeight: "bold",
   },
   addButton: {
     position: "fixed",

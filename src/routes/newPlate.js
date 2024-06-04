@@ -101,11 +101,11 @@ const NewPlate = ({ plateProps }) => {
     formData.append("comment", dishComment ? dishComment : "");
     formData.append("date", selectedDate);
     formData.append("restaurantString", JSON.stringify(restaurant));
-    formData.append("visitName", visit.name ? visit.name : "");
-    formData.append("visitDate", visit.date);
-    if (visit._id) {
-      formData.append("visitId", visit._id);
-    }
+    // formData.append("visitName", visit.name ? visit.name : "");
+    // formData.append("visitDate", visit.date);
+    // if (visit._id) {
+    //   formData.append("visitId", visit._id);
+    // }
     formData.append("dishRating", dishRating);
     setLoading(true);
     let response = null;
@@ -116,7 +116,10 @@ const NewPlate = ({ plateProps }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate(-1);
+      console.log(response.data);
+      navigate("/restaurant", {
+        state: { restaurantId: response.data.restaurant._id },
+      });
     } catch (e) {
       console.log(e, "eee");
     }
@@ -223,19 +226,19 @@ const NewPlate = ({ plateProps }) => {
       />
       <View style={styles.modalContainer}>
         {step === 1 && <StepRestaurant selectRestautant={selectRestautant} />}
-        {step === 2 && <StepVisit setVisit={onChangeVisit} />}
-        {step === 3 && (
+        {/* {step === 2 && <StepVisit setVisit={onChangeVisit} />} */}
+        {step === 2 && (
           <StepImage
             setDishImage={setDishImage}
             restaurant={restaurant}
             setDishFile={setDishFile}
             dishImage={dishImage}
             onContinue={() => {
-              setStep(4);
+              next();
             }}
           />
         )}
-        {step === 4 && (
+        {step === 3 && (
           <StepNamePlate
             platesToSelect={platesToSelect}
             searchTerm={searchTerm}
@@ -245,7 +248,7 @@ const NewPlate = ({ plateProps }) => {
           />
         )}
 
-        {step === 5 && (
+        {step === 4 && (
           <StepSummary
             onSave={onSave}
             setDishImage={setDishImage}

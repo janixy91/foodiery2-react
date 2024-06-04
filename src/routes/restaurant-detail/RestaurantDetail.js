@@ -10,6 +10,9 @@ import { MdOutlineAddLocationAlt } from "react-icons/md";
 import Header from "../../components/compositions/Header";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import useWhislits from "../../hooks/useWhislits";
+import useRestaurants from "../../hooks/useRestaurants";
+import { PiBowlFoodDuotone } from "react-icons/pi";
 
 const RestaurantDetail = () => {
   const location = useLocation();
@@ -17,8 +20,9 @@ const RestaurantDetail = () => {
   const [restaurant, setRestaurant] = useState([]);
   const [visited, noVisited] = useState(false);
   const navigate = useNavigate();
-
+  const { addWhislist, isInWhislist, deleteWhislist } = useWhislits();
   const apiKey = API_KEY; // Reemplaza con tu clave API de Google
+  const { isVisited, createRestaurant } = useRestaurants();
 
   useEffect(() => {
     init();
@@ -36,6 +40,28 @@ const RestaurantDetail = () => {
         },
       }
     );
+
+    const locality = response.data.addressComponents.find((item) => {
+      return item.types.find((subitem) => subitem === "locality");
+    }).longText;
+    const restaurant = {
+      name: response.data.displayName.text,
+      placeId: response.data.id,
+      placeReference: response.data.id,
+      placeTypes: response.data.types,
+      formatted_address: response.data.formattedAddress,
+      locality: locality,
+      latitude: response.data.location.latitude,
+      longitude: response.data.location.longitude,
+      address_components: response.data.addressComponents,
+    };
+    const restaurantModel = await createRestaurant(
+      restaurant,
+      response.data.id
+    );
+    console.log(restaurantModel, "restaurantModel");
+    setRestaurant(restaurantModel.restaurantModel);
+
     // const response = {
     //   data: {
     //     name: "places/ChIJ7R2jtOZbTg0RpGUzXA5jBnc",
@@ -846,7 +872,7 @@ const RestaurantDetail = () => {
     //   },
     // };
     console.log(response, "res");
-    setRestaurant(response.data);
+    // setRestaurant(response.data);
     if (response.data.photos) {
       const photoUrls = response.data.photos.map((photo) => {
         const photoReference = photo.name;
@@ -861,6 +887,16 @@ const RestaurantDetail = () => {
   }
   function onBack() {
     navigate(-1);
+  }
+
+  function onGoCreate() {
+    navigate("/create-plate", {
+      state: { restaurant, step: 2, from: "restaurant" },
+    });
+  }
+
+  function onGoRestaurant() {
+    navigate("/restaurant", { state: { restaurantId: restaurant._id } });
   }
 
   return (
@@ -886,26 +922,41 @@ const RestaurantDetail = () => {
       <div className="restaurant-detail__info">
         <span className="restaurant-detail__title">
           <span className="restaurant-detail__title-text">
-            {restaurant?.displayName?.text}
+            {restaurant?.name}
           </span>
           <span className="restaurant-detail__address">
-            {restaurant?.formattedAddress}
+            {restaurant?.formatted_address}
           </span>
         </span>
 
-        {!visited && (
+        {!isVisited(restaurant.placeId) && (
           <div className="restaurant-detail__meta">
             <div className="restaurant-detail__meta-1">
               <div className="restaurant-detail__visit">
-                <MdOutlineWrongLocation size={30} color="black" />
+                <MdOutlineWrongLocation size={30} color={"black"} />
                 <span>No visitado</span>
               </div>
-              <div className="restaurant-detail__whislist">
-                <TbMapPinHeart size={30} color="gray" />
-                <span>¡Añadir a whislist! </span>
-              </div>
+              {isInWhislist(restaurant.placeId) === false && (
+                <div
+                  className="restaurant-detail__whislist"
+                  onClick={() => addWhislist(restaurant)}
+                >
+                  <TbMapPinHeart size={30} color="gray" />
+                  <span>¡Añadir a whislist! </span>
+                </div>
+              )}
+              {isInWhislist(restaurant.placeId) === true && (
+                <div
+                  className="restaurant-detail__whislist"
+                  onClick={() => deleteWhislist(restaurant)}
+                >
+                  <TbMapPinHeart size={30} color="red" />
+                  <span>En la wishlist</span>
+                </div>
+              )}
             </div>
             <Button
+              onPress={onGoCreate}
               text={
                 <div class="home__button-add">
                   <MdOutlineAddLocationAlt
@@ -919,10 +970,25 @@ const RestaurantDetail = () => {
             />
           </div>
         )}
-        {visited && (
-          <div className="restaurant-detail__visit">
-            <MdOutlineLocationOn size={30} color="green" />
-            <span>No visitado</span>
+        {isVisited(restaurant.placeId) && (
+          <div className="restaurant-detail__visited">
+            <div className="restaurant-detail__visited-icon">
+              <MdOutlineLocationOn size={30} color="green" />
+              <span> visitado</span>
+            </div>
+            <Button
+              onPress={onGoRestaurant}
+              text={
+                <div class="home__button-add">
+                  <PiBowlFoodDuotone
+                    size={24}
+                    color="white"
+                    style={{ marginLeft: 8 }}
+                  />
+                  <span class="home__button-add-text">Ver platos</span>
+                </div>
+              }
+            />
           </div>
         )}
       </div>

@@ -9,12 +9,19 @@ import PlacesSearch from "../../components/compositions/PlacesSearch/PlacesSearc
 import Autocomplete from "react-google-autocomplete";
 import { API_KEY } from "../../constants/enviroment";
 import useRestaurants from "../../hooks/useRestaurants";
+import useWhislits from "../../hooks/useWhislits";
 
 const Home = () => {
   const navigate = useNavigate();
   useRestaurants();
+  useWhislits();
+
   function goVisited() {
     navigate("/visited");
+  }
+
+  function goWishlist() {
+    navigate("/wishlist");
   }
 
   function goNewVisit() {
@@ -58,7 +65,7 @@ const Home = () => {
             <img class="home__option-img" src="/explorar.png" />
             <span class="home__option-text">Explorar</span>
           </div>
-          <div class="home__option">
+          <div class="home__option" onClick={goWishlist}>
             <img class="home__option-img" src="/whislist.png" />
             <span class="home__option-text">Whislist</span>
           </div>

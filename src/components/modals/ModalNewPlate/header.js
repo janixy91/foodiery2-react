@@ -47,7 +47,11 @@ const Header = ({ onDeleteReview, step, onBackHistory, back, from }) => {
           />
         )}
         <Text style={styles.modalHeader} classname={"title"}>
-          {from === "edit" ? "Editar plato" : "Nueva visita"}
+          {from === "edit"
+            ? "Editar plato"
+            : step < 2
+            ? "Nueva visita"
+            : "Nuevo plato"}
         </Text>
         <TouchableOpacity style={styles.closeButton} onPress={onBackHistory}>
           <AiOutlineClose size={24} color="white" />

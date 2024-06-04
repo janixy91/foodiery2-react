@@ -1,5 +1,6 @@
 @import "./routes/home/home.scss";
 @import "./routes/restaurant-detail/restaurant-detail.scss";
+@import "./routes/wishlist/wishlist.scss";
 @import "./components/carrusel/carrusel.scss";
 @import "./components/compositions/plateItem/plate-item.scss";
 

@@ -82,3 +82,18 @@
   display: flex;
   justify-content: space-around;
 }
+
+.restaurant-detail__visited {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.restaurant-detail__visited-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0px;
+  font-family: 'Chewy';
+}
