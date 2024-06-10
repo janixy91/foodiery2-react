@@ -1,8 +1,11 @@
 @import "./routes/home/home.scss";
 @import "./routes/restaurant-detail/restaurant-detail.scss";
 @import "./routes/wishlist/wishlist.scss";
+@import "./routes/awards/awards.scss";
 @import "./components/carrusel/carrusel.scss";
 @import "./components/compositions/plateItem/plate-item.scss";
+@import "./components/atoms/award/award.scss";
+@import "./components/modals/awardModal/awardModal.scss";
 
 .App {
   text-align: center;

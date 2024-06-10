@@ -9,13 +9,20 @@
 }
 
 .home__header {
-  display: flex;
   padding: 20px;
   padding-bottom: 0;
+  align-items: center;
 }
 
 .home__header-select {
-  width: 100%;
+  width: 90%;
+  position: relative;
+  top: -26px;
+  margin: auto    ;
+}
+
+.home__header-profile {
+  margin-left: 8px;
 }
 
 .home__options {
@@ -35,6 +42,21 @@
 
 .home__option-text {
   font-family: 'Gagalin';
+}
+
+.home__perfil {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  color: steelblue;
+  background: wheat;
+  padding: 9px 0;
+  display: flex;
+
+  margin-bottom: 30px;
+  height: 33px;
 }
 
 .home__option {
@@ -68,8 +90,6 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
-  
-
 }
 
 .home__options-title-text {
@@ -79,6 +99,7 @@
 .home__footer {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .home__footer {
@@ -96,6 +117,21 @@
   }
 }
 
+.home__footer-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: white;
+  border-radius: 30px;
+  height: 43px;
+  width: 46px;
+  background-size: cover;
+  box-shadow: 10px 10px 9px -7px rgba(168, 168, 168, 1);
+  outline: auto;
+  outline-color: burlywood;
+}
+
 .home__button-add {
   display: flex;
   justify-content: center;
@@ -109,4 +145,47 @@
 
 .home__button-add-text {
   margin-left: 8px;
+}
+
+.home__star-img {
+  background-color: white;
+  border-radius: 30px;
+  height: 43px;
+  width: 46px;
+  background-size: cover;
+  box-shadow: 10px 10px 9px -7px rgba(168, 168, 168, 1);
+  outline: auto;
+  outline-color: burlywood;
+  position: relative;
+}
+
+.home__cronometer {
+  position: absolute;
+  color: black;
+  bottom: -21px;
+  right: -17px;
+  font-family: 'Chewy';
+  border-radius: 10px;
+  width: 80px;
+  font-size: 10px;
+  background: wheat;
+  padding: 2px;
+  text-align: center;
+  border: 2px solid blanchedalmond;
+}
+
+.awards__temporada {
+  display: inline;
+}
+
+.awards__temporada-text {
+  font-size: 12px;
+  display: inline;
+}
+
+.awards__temporada-cronometer {
+  display: inline-block;
+  margin-left: 4px;
+  margin-bottom: 20px;
+
 }

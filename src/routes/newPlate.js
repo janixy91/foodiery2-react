@@ -11,6 +11,7 @@ import axios from "../utils/axios";
 import { useAuth } from "../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import StepVisit from "../components/modals/ModalNewPlate/stepVisit";
+import useRestaurants from "../hooks/useRestaurants";
 
 const NewPlate = ({ plateProps }) => {
   const { state } = useLocation();
@@ -26,6 +27,7 @@ const NewPlate = ({ plateProps }) => {
   const [dishRating, setDishRating] = useState(5);
   // lista de platos del restaurate para el paso 3
   const [platesToSelect, setPlatesToSelect] = useState([]);
+  const { deleteCtxRestaurants } = useRestaurants();
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -116,9 +118,12 @@ const NewPlate = ({ plateProps }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response.data);
+      deleteCtxRestaurants();
       navigate("/restaurant", {
-        state: { restaurantId: response.data.restaurant._id },
+        state: {
+          restaurantId: response.data.restaurant._id,
+          awards: response.data.awards,
+        },
       });
     } catch (e) {
       console.log(e, "eee");
@@ -152,6 +157,7 @@ const NewPlate = ({ plateProps }) => {
         "Content-Type": "multipart/form-data",
       },
     });
+    deleteCtxRestaurants();
 
     navigate(-1);
     setLoading(false);

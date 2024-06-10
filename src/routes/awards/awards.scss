@@ -1,0 +1,61 @@
+.awards__container {
+  margin-top: 70px;
+}
+
+.awards__image {
+  background-color: white;
+  border-radius: 30px;
+  height: 43px;
+  width: 46px;
+  background-size: cover;
+  outline: auto;
+  outline-color: burlywood;
+}
+
+.awards__top {
+  display: flex;
+  align-items: center;
+  margin-left: 22px;
+}
+
+.awards__image {
+  margin-right: 12px;
+}
+
+.awards__points {
+  font-family: Chewy;
+  display: block;
+}
+
+.awards__awards-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.awards__awards {
+  padding: 16px;
+}
+
+.awards__award {
+  margin: 6px;
+  width: 44%;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.awards__title {
+  font-family: 'Gagalin';
+  display: block;
+  font-size: 20px;
+  color: steelblue;
+  background: wheat;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.awards__level {
+  font-family: Chewy;
+}
+
+

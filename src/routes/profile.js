@@ -297,30 +297,32 @@ const Profile = () => {
               </View>
             </>
           )}
-          <View
+
+          <div
+            onClick={onLogout}
             style={{
-              ...styles.cambiarContrasenaContainer,
               borderWidth: 1,
               borderStyle: "solid",
               borderColor: "#eeeeee",
-              padding: 16,
-              borderRadius: 8,
+              padding: 8,
+              position: "relative",
+              top: 20,
             }}
           >
-            <Button text="Cerrar sesión" onPress={onLogout} />
-          </View>
-          <View
+            Cerrar sesión
+          </div>
+          <div
+            onClick={showConfirmDelete}
             style={{
-              ...styles.cambiarContrasenaContainer,
               borderWidth: 1,
               borderStyle: "solid",
               borderColor: "#eeeeee",
-              padding: 16,
-              borderRadius: 8,
+              padding: 8,
+              marginTop: 100,
             }}
           >
-            <Button text="Borrar cuenta" onPress={showConfirmDelete} />
-          </View>
+            Borrar cuenta
+          </div>
           {<LoadingSpinner loading={loading} />}
         </View>
       </View>

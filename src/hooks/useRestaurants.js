@@ -33,31 +33,41 @@ const useRestaurants = () => {
   }
 
   async function loadRestaurants() {
-    if (ctxRestaurants.length === 0) {
-      setLoad(false);
-      setLoading(true);
-      try {
-        const response = await axios.get(`/restaurants/allInfo`, {
-          headers: {
-            authorization: session?._id,
-          },
-        });
+    setLoad(false);
+    setLoading(true);
+    try {
+      const response = await axios.get(`/restaurants/allInfo`, {
+        headers: {
+          authorization: session?._id,
+        },
+      });
 
-        setCtxRestaurants(response.data);
-        setError(false);
-      } catch (e) {
-        setError(true);
-      }
-      setLoad(true);
-      setLoading(false);
+      setCtxRestaurants(response.data);
+      setError(false);
+    } catch (e) {
+      setError(true);
     }
+    setLoad(true);
+    setLoading(false);
   }
 
   function isVisited(placeId) {
     return !!ctxRestaurants.find((item) => item.placeId === placeId);
   }
 
-  return { load, loading, error, loadRestaurants, isVisited, createRestaurant };
+  function deleteCtxRestaurants() {
+    setCtxRestaurants([]);
+  }
+
+  return {
+    load,
+    loading,
+    error,
+    loadRestaurants,
+    isVisited,
+    createRestaurant,
+    deleteCtxRestaurants,
+  };
 };
 
 export default useRestaurants;

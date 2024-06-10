@@ -21,43 +21,48 @@ import Visited from "./routes/visited";
 import Wishlist from "./routes/wishlist/Wishlist";
 import RestaurantDetail from "./routes/restaurant-detail/RestaurantDetail";
 import MyProvider from "./context/Provider";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import Awards from "./routes/awards/Awards";
 
 const App = () => {
   return (
-    <AuthProvider>
-      <MyProvider>
-        <Routes>
-          <Route
-            index
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
+    <GoogleOAuthProvider clientId="611124602994-meub9tn628kvv0rdg6t7tq9r0flk95gi.apps.googleusercontent.com">
+      <AuthProvider>
+        <MyProvider>
+          <Routes>
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route path="/" element={<SignIn />} />
-          <Route path="/login" element={<SignIn />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/restaurant" element={<RestaurantList />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/visited" element={<Visited />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/create-plate" element={<NewPlate />} />
-          <Route path="/restaurant-detail" element={<RestaurantDetail />} />
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-        <Toast />
-      </MyProvider>
-    </AuthProvider>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/login" element={<SignIn />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/restaurant" element={<RestaurantList />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/visited" element={<Visited />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/create-plate" element={<NewPlate />} />
+            <Route path="/restaurant-detail" element={<RestaurantDetail />} />
+            <Route path="/awards" element={<Awards />} />
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Toast />
+        </MyProvider>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 };
 export default App;

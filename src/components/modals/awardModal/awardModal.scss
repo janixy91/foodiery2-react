@@ -1,0 +1,27 @@
+.award-modal {
+  height: 100%;
+    display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+ 
+}
+
+.award-modal__title {
+  font-family: 'Gagalin';
+  margin-bottom: 20px;
+}
+
+.award-modal__list {
+
+}
+
+.award-modal__award {
+  margin-bottom: 30px;
+}
+
+.award-modal__close {
+  position: absolute;
+  right: 20px;
+  top: 20px
+}

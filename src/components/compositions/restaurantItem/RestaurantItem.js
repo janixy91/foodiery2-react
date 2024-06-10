@@ -62,11 +62,12 @@ const styles = {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 60,
+    minHeight: 60,
   },
   ratingContainer: {
     flexDirection: "row",
     alignItems: "center",
+    flex: "0 0 auto",
   },
   ratingText: {
     marginRight: 4,

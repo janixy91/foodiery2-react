@@ -1,5 +1,5 @@
 // SignIn.js
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import Button from "../components/atoms/Button";
@@ -13,16 +13,26 @@ import axios from "../utils/axios";
 import Loading from "../components/atoms/Loading";
 import { toast } from "react-toastify";
 import { MAIN_COLOR } from "../constants/colors";
+import { GoogleLogin } from "@react-oauth/google";
 
 const SignIn = () => {
   const LoginImage = require("../assets/loginimage.png");
   const { login } = useAuth();
+  const [buttonWidth, setButtonWidth] = useState("300px"); // Ancho predeterminado
+  const buttonRef = useRef(null);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [emailError, setEmailError] = useState(false);
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (buttonRef.current) {
+      const width = buttonRef.current.offsetWidth;
+      setButtonWidth(`${width}px`);
+    }
+  }, []);
+
   const handleLogin = async () => {
     validateEmail();
 
@@ -44,6 +54,23 @@ const SignIn = () => {
           toast.error("Ha habido un error, inténtalo de nuevo más tarde");
         }
       }
+    }
+
+    setLoading(false);
+  };
+
+  const handleLoginGoogle = async (credentials) => {
+    try {
+      setLoading(true);
+      const response = await axios.post(`/users/login-google`, {
+        token: credentials.credential,
+        clientId: credentials.clientId,
+      });
+
+      await login(response.data);
+      navigate("/home");
+    } catch (e) {
+      toast.error("Ha habido un error, inténtalo de nuevo más tarde");
     }
 
     setLoading(false);
@@ -132,12 +159,23 @@ const SignIn = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <Button
-          text={"Iniciar sesión"}
-          onPress={handleLogin}
-          disabled={!password || !email || loading}
-        />
+        <div ref={buttonRef}>
+          <Button
+            text={"Iniciar sesión"}
+            onPress={handleLogin}
+            disabled={!password || !email || loading}
+          />
+        </div>
 
+        <div style={{ width: "100%", marginTop: 12 }}>
+          <GoogleLogin
+            width={buttonWidth}
+            onSuccess={handleLoginGoogle}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+        </div>
         <View
           style={{
             flexDirection: "row",

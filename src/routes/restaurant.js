@@ -1,6 +1,6 @@
-// RestaurantList.js
+// Restaurant.js
 import React, { useEffect, useState } from "react";
-
+import AwardModal from "../components/modals/awardModal/AwardModal";
 import Moment from "moment";
 import axios from "../utils/axios";
 import { MAIN_COLOR, OTHER_ORANGE, SECOND_COLOR2 } from "../constants/colors";
@@ -18,7 +18,7 @@ import LoadingSpinner from "../components/atoms/Loading";
 import PlateItem from "../components/compositions/plateItem/PlateItem";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 
-const RestaurantList = () => {
+const Restaurant = () => {
   Moment.locale("es");
   const [searchTerm, setSearchTerm] = useState("");
   const [restaurant, setRestaurant] = useState({});
@@ -27,10 +27,15 @@ const RestaurantList = () => {
   const { user: session } = useAuth();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
+  const [awards, setAwards] = useState([]);
 
   useEffect(() => {
     loadRestaurants();
   }, [location.state.restaurantId]);
+
+  useEffect(() => {
+    setAwards(location.state.awards ? location.state.awards : []);
+  }, [location.state.awards]);
 
   async function loadRestaurants() {
     setLoading(true);
@@ -148,6 +153,14 @@ const RestaurantList = () => {
           </TouchableOpacity>
         </View>
       </View>
+      {!!awards.length > 0 && (
+        <AwardModal
+          awards={awards}
+          isVisible={!!awards.length > 0}
+          onClose={() => setAwards([])}
+        />
+      )}
+
       <LoadingSpinner loading={loading} />
     </div>
   );
@@ -237,4 +250,4 @@ const styles = {
   },
 };
 
-export default RestaurantList;
+export default Restaurant;

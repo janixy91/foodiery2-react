@@ -40,7 +40,7 @@ const Visited = () => {
   }
 
   function onBack() {
-    navigate(-1);
+    navigate("/home");
   }
 
   function onGoCreate() {

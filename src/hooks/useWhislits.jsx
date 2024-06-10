@@ -9,9 +9,7 @@ const useWhislits = () => {
   const { ctxWhislist, setCtxWhislist } = useContext(MyContext);
 
   useEffect(() => {
-    if (ctxWhislist.plates.length === 0 && ctxWhislist.restaurants.length === 0 ) {
-      loadWhislist();
-    }
+    loadWhislist();
   }, []);
 
   async function loadWhislist() {
@@ -44,7 +42,10 @@ const useWhislits = () => {
         },
       });
 
-      loadWhislist()
+
+      await loadWhislist()
+      return response.data.awards
+
     } catch (e) {
       console.log(e)
     }

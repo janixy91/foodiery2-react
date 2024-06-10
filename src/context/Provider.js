@@ -8,10 +8,21 @@ const MyProvider = ({ children }) => {
     plates: [],
     restaurants: [],
   });
+  const [ctxUser, setCtxUser] = useState(null);
+  const [ctxSeason, setCtxSeason] = useState(null);
 
   return (
     <MyContext.Provider
-      value={{ ctxRestaurants, setCtxRestaurants, ctxWhislist, setCtxWhislist }}
+      value={{
+        ctxRestaurants,
+        setCtxRestaurants,
+        ctxWhislist,
+        setCtxWhislist,
+        ctxUser,
+        setCtxUser,
+        setCtxSeason,
+        ctxSeason,
+      }}
     >
       {children}
     </MyContext.Provider>

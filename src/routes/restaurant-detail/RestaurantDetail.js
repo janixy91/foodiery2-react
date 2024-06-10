@@ -13,6 +13,7 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import useWhislits from "../../hooks/useWhislits";
 import useRestaurants from "../../hooks/useRestaurants";
 import { PiBowlFoodDuotone } from "react-icons/pi";
+import AwardModal from "../../components/modals/awardModal/AwardModal";
 
 const RestaurantDetail = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const RestaurantDetail = () => {
   const { addWhislist, isInWhislist, deleteWhislist } = useWhislits();
   const apiKey = API_KEY; // Reemplaza con tu clave API de Google
   const { isVisited, createRestaurant } = useRestaurants();
+  const [awards, setAwards] = useState([]);
 
   useEffect(() => {
     init();
@@ -32,8 +34,8 @@ const RestaurantDetail = () => {
   async function init() {
     // en fields se puede poner * para que vengan todos.
     const response = await axios.get(
-      `https://places.googleapis.com/v1/places/${location.state.placeId}?fields=*`,
-      // `https://places.googleapis.com/v1/places/${location.state.placeId}?fields=displayName,photos,formattedAddress`,
+      // `https://places.googleapis.com/v1/places/${location.state.placeId}?fields=*`,
+      `https://places.googleapis.com/v1/places/${location.state.placeId}?fields=id,displayName,addressComponents,primaryType,types,location,photos,formattedAddress`,
       {
         params: {
           key: API_KEY, // Reemplaza 'YOUR_API_KEY' con tu clave API de Google
@@ -41,6 +43,7 @@ const RestaurantDetail = () => {
       }
     );
 
+    console.log(response.data, "lolo");
     const locality = response.data.addressComponents.find((item) => {
       return item.types.find((subitem) => subitem === "locality");
     }).longText;
@@ -49,12 +52,17 @@ const RestaurantDetail = () => {
       placeId: response.data.id,
       placeReference: response.data.id,
       placeTypes: response.data.types,
+      photos: response.data.photos,
+      primaryType: response.data.primaryType,
       formatted_address: response.data.formattedAddress,
       locality: locality,
       latitude: response.data.location.latitude,
       longitude: response.data.location.longitude,
       address_components: response.data.addressComponents,
     };
+
+    console.log(restaurant, "lolorestaurant");
+
     const restaurantModel = await createRestaurant(
       restaurant,
       response.data.id
@@ -939,7 +947,13 @@ const RestaurantDetail = () => {
               {isInWhislist(restaurant.placeId) === false && (
                 <div
                   className="restaurant-detail__whislist"
-                  onClick={() => addWhislist(restaurant)}
+                  onClick={async () => {
+                    const aa = await addWhislist(restaurant);
+                    console.log(aa);
+                    if (aa?.length > 0) {
+                      setAwards(aa);
+                    }
+                  }}
                 >
                   <TbMapPinHeart size={30} color="gray" />
                   <span>¡Añadir a whislist! </span>
@@ -990,6 +1004,13 @@ const RestaurantDetail = () => {
               }
             />
           </div>
+        )}
+        {!!awards.length > 0 && (
+          <AwardModal
+            awards={awards}
+            isVisible={!!awards.length > 0}
+            onClose={() => setAwards([])}
+          />
         )}
       </div>
     </div>

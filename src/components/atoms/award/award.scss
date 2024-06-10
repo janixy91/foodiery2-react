@@ -1,0 +1,47 @@
+.award {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;}
+
+.award__circle {
+  height: 70px;
+  width: 70px;
+  outline: auto;
+  background-color: darkgray;
+  border-radius: 100%;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.award__text {
+  margin-top: 10px;
+  font-family: 'Chewy';
+  color: lightslategray;}
+
+
+.award__check {
+  display: none;
+}
+
+.award--active {
+  .award__circle {
+    background: #4CAF50 !important;
+    color: white;
+    outline-color: #bed3a6 !important;
+  }
+
+  .award__text {
+    color: #4CAF50 !important;
+  }
+
+  .award__check {
+    display: block;
+    position: absolute;
+    top: -1px;
+    right: 5px;
+  }
+}
