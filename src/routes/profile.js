@@ -34,7 +34,6 @@ const Profile = () => {
   useEffect(() => {
     loadProfile();
   }, []);
-
   const showConfirmDelete = () => {
     const confirmResult = window.confirm(
       "¿Estás seguro que quieres borrar tu cuenta?"
@@ -56,6 +55,7 @@ const Profile = () => {
       });
       setUser({
         name: response.data.name,
+        method: response.data.method,
         birthday: new Date(response.data.birthday).getTime(),
       });
       setError(false);
@@ -229,7 +229,7 @@ const Profile = () => {
               </View>
             </>
           )}
-          {!error && (
+          {!error && user.method !== "google" && (
             <>
               <View
                 style={{

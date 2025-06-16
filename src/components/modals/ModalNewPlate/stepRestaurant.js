@@ -31,11 +31,8 @@ const StepRestaurant = ({ selectRestautant }) => {
   // }
 
   function onPressPlaceWeb(data, a) {
-    console.log(data, a, "hola");
-
     geocodeByPlaceId(data.value.place_id)
       .then((results) => {
-        console.log(results, "reeee");
         const locality = results[0].address_components.find((item) => {
           return item.types.find((subitem) => subitem === "locality");
         }).long_name;
@@ -52,7 +49,6 @@ const StepRestaurant = ({ selectRestautant }) => {
         selectRestautant(restaurant);
       })
       .catch((error) => {
-        console.log(error, "error");
         const restaurant = {
           name: data.value.structured_formatting.main_text,
           placeId: data.value.place_id,

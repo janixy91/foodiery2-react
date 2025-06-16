@@ -28,7 +28,6 @@ const RestaurantDetail = () => {
 
   useEffect(() => {
     init();
-    console.log("por que ?");
   }, []);
 
   async function init() {
@@ -43,7 +42,6 @@ const RestaurantDetail = () => {
       }
     );
 
-    console.log(response.data, "lolo");
     const locality = response.data.addressComponents.find((item) => {
       return item.types.find((subitem) => subitem === "locality");
     }).longText;
@@ -61,13 +59,10 @@ const RestaurantDetail = () => {
       address_components: response.data.addressComponents,
     };
 
-    console.log(restaurant, "lolorestaurant");
-
     const restaurantModel = await createRestaurant(
       restaurant,
       response.data.id
     );
-    console.log(restaurantModel, "restaurantModel");
     setRestaurant(restaurantModel.restaurantModel);
 
     // const response = {
@@ -879,7 +874,6 @@ const RestaurantDetail = () => {
     //     },
     //   },
     // };
-    console.log(response, "res");
     // setRestaurant(response.data);
     if (response.data.photos) {
       const photoUrls = response.data.photos.map((photo) => {
@@ -949,7 +943,6 @@ const RestaurantDetail = () => {
                   className="restaurant-detail__whislist"
                   onClick={async () => {
                     const aa = await addWhislist(restaurant);
-                    console.log(aa);
                     if (aa?.length > 0) {
                       setAwards(aa);
                     }

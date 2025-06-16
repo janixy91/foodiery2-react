@@ -55,6 +55,9 @@ const Home = () => {
     navigate("/profile");
   }
 
+  function onGoPlates() {
+    navigate("/plates");
+  }
   return (
     <div className="home">
       <div className="home__header">
@@ -115,9 +118,9 @@ const Home = () => {
             <img class="home__option-img" src="/visited.png" />
             <span class="home__option-text"> Visitados</span>
           </div>
-          <div class="home__option">
-            <img class="home__option-img" src="/explorar.png" />
-            <span class="home__option-text">Explorar</span>
+          <div class="home__option" onClick={onGoPlates}>
+            <img class="home__option-img" src="/plate.png" />
+            <span class="home__option-text">Platos</span>
           </div>
           <div class="home__option" onClick={goWishlist}>
             <img class="home__option-img" src="/whislist.png" />

@@ -81,7 +81,6 @@ const roles = [
 
 // Función para determinar el rol y nivel basado en la cantidad de puntos del usuario
 export function determinarRolYnivel(puntosUsuario) {
-  console.log(puntosUsuario);
   // Ordenar roles por cantidad de puntos de menor a mayor
   const rolesOrdenados = roles.sort((a, b) => a.puntos - b.puntos);
 

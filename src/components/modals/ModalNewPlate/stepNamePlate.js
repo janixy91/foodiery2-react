@@ -12,7 +12,6 @@ const StepNamePlate = ({
   onAddPlate,
   handlePlatePress,
 }) => {
-  console.log(platesToSelect, "platesToSelect");
   return (
     <View>
       <Text style={{ marginBottom: 16, marginTop: 0, display: "block" }}>

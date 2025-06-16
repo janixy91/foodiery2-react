@@ -41,7 +41,6 @@ const NewPlate = ({ plateProps }) => {
     plate?.date || new Date().getTime()
   );
   const navigate = useNavigate();
-  console.log(restaurant, "restaurant");
 
   useEffect(() => {
     if (state.restaurant) {

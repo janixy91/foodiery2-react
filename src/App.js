@@ -23,6 +23,7 @@ import RestaurantDetail from "./routes/restaurant-detail/RestaurantDetail";
 import MyProvider from "./context/Provider";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Awards from "./routes/awards/Awards";
+import Plates from "./routes/plates/Plates";
 
 const App = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
             <Route path="/create-plate" element={<NewPlate />} />
             <Route path="/restaurant-detail" element={<RestaurantDetail />} />
             <Route path="/awards" element={<Awards />} />
+            <Route path="/plates" element={<Plates />} />
             <Route
               path="/home"
               element={

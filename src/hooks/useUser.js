@@ -18,7 +18,6 @@ const useUser = () => {
           authorization: user?._id,
         },
       });
-      console.log(response.data, "response");
       setCtxUser(response.data);
     } catch (e) {}
   }

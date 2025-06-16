@@ -11,7 +11,6 @@ const Whislist = () => {
   const { ctxWhislist } = useContext(MyContext);
   const navigate = useNavigate();
 
-  console.log(ctxWhislist, "ctxWhislist");
   useWhislits();
 
   function onBack() {

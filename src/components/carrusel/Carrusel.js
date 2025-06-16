@@ -22,7 +22,6 @@ const responsive = {
   },
 };
 const Carrusel = ({ images = [] }) => {
-  console.log(images, "sss");
   return (
     <div>
       <ImageGallery

@@ -103,7 +103,6 @@ const StepSummary = ({
         value={dishRating}
         className="slider"
         onChange={(e) => {
-          console.log(e.currentTarget.value);
           setDishRating(e.target.value);
         }}
       />
